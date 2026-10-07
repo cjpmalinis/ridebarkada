@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RideBarkada Admin</title><link rel="stylesheet" href="styles.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script></head>
+<body><main class="app"><section class="screen">
+<header class="topbar"><div><small>RideBarkada</small><strong>Admin Dashboard</strong></div><button id="logout" class="iconbtn">↪</button></header>
+<div id="summary" class="grid"></div><h2>Recent Rides</h2><div id="rides"></div><h2>Users</h2><div id="users"></div>
+</section></main>
+<script>
+const c=supabase.createClient(RB_CONFIG.SUPABASE_URL,RB_CONFIG.SUPABASE_ANON_KEY);const $=x=>document.getElementById(x);
+async function init(){const {data:{user}}=await c.auth.getUser();if(!user){location.href='index.html';return}
+const {data:p}=await c.from('profiles').select('*').eq('id',user.id).single();if(p?.role!=='admin'){document.body.innerHTML='<main class="app"><section class="screen"><div class="card"><h2>Access denied</h2><p>Admin role required.</p></div></section></main>';return}load()}
+async function load(){
+ const {count:users}=await c.from('profiles').select('*',{count:'exact',head:true});
+ const {count:rides}=await c.from('rides').select('*',{count:'exact',head:true});
+ const {count:active}=await c.from('rides').select('*',{count:'exact',head:true}).in('status',['requested','accepted','arriving','ongoing']);
+ $('summary').innerHTML=`<div class="stat"><small>Users</small><strong>${users||0}</strong></div><div class="stat"><small>Total rides</small><strong>${rides||0}</strong></div><div class="stat"><small>Active rides</small><strong>${active||0}</strong></div>`;
+ const {data:r}=await c.from('rides').select('*,passenger:profiles!passenger_id(full_name),rider:profiles!rider_id(full_name)').order('created_at',{ascending:false}).limit(30);
+ $('rides').innerHTML=r?.length?r.map(x=>`<div class="card ride"><strong>${x.status.toUpperCase()}</strong><p>${esc(x.passenger?.full_name||'')} — ${esc(x.pickup_address)} → ${esc(x.destination_address)}</p><small>Rider: ${esc(x.rider?.full_name||'Unassigned')} · ₱${Number(x.estimated_fare).toFixed(2)}</small></div>`).join(''):'<div class="empty">No rides.</div>';
+ const {data:u}=await c.from('profiles').select('*').order('created_at',{ascending:false}).limit(50);
+ $('users').innerHTML=u?.map(x=>`<div class="card"><strong>${esc(x.full_name)}</strong><p>${esc(x.role)} ${x.is_online?'🟢 Online':''}</p></div>`).join('')||'';
+}
+$('logout').onclick=async()=>{await c.auth.signOut();location.href='index.html'};
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}init();
+</script></body></html>
