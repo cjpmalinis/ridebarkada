@@ -1,164 +1,39 @@
-<!doctype html>
-<html lang="en"><head>
+<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101827"><title>RideBarkada</title>
-<link rel="stylesheet" href="styles.css">
-<style id="ridebarkada-inline-style">
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
-
-:root{
-  --ink:#101827;--muted:#6b7280;--paper:#f7f8fa;--card:#fff;--line:#e8ebf0;
-  --brand:#ff6b35;--brand2:#ff8b5c;--dark:#101827;--green:#18a66b;
-  --shadow:0 18px 50px rgba(16,24,39,.08);--radius:22px;
-}
-*{box-sizing:border-box}
-body{margin:0;background:linear-gradient(135deg,#f7f8fa,#fff);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif}
-button,input{font:inherit}
-button{cursor:pointer}
-.app-shell{min-height:100vh;max-width:760px;margin:auto;background:var(--paper)}
-.screen{padding:18px 18px 42px}
-.hidden{display:none!important}
-.brand-top{display:flex;align-items:center;gap:10px;font-weight:800}
-.brand-mark{width:42px;height:42px;border-radius:14px;background:var(--dark);display:grid;place-items:center;color:#fff;font-size:22px;box-shadow:0 10px 25px rgba(16,24,39,.18)}
-.brand-top strong{font-family:"Plus Jakarta Sans";font-size:18px}
-.auth-wrap{max-width:470px;margin:0 auto;padding-top:28px}
-.auth-hero{padding:35px 8px 25px}
-.auth-hero .eyebrow{color:var(--brand);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
-.auth-hero h1{font:800 40px/1.05 "Plus Jakarta Sans";margin:10px 0}
-.auth-hero p{color:var(--muted);font-size:16px;line-height:1.6;margin:0}
-.auth-art{height:155px;margin:18px 0;border-radius:30px;background:radial-gradient(circle at 80% 20%,#ffb79a,transparent 35%),linear-gradient(135deg,#151d2e,#26344d);position:relative;overflow:hidden}
-.auth-art:before{content:"";position:absolute;width:240px;height:240px;border:42px solid rgba(255,107,53,.9);border-radius:50%;right:-100px;top:-100px}
-.auth-art .bike{position:absolute;left:32px;bottom:26px;font-size:70px;filter:drop-shadow(0 12px 12px #0005)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
-label{display:block;font-weight:700;font-size:14px;margin:15px 0}
-.input{width:100%;padding:14px 15px;border:1px solid #dce1e8;border-radius:14px;background:#fff;outline:none;margin-top:8px}
-.input:focus{border-color:var(--brand);box-shadow:0 0 0 4px #ff6b3518}
-.primary{border:0;border-radius:14px;background:linear-gradient(135deg,var(--brand),#f4511e);color:#fff;font-weight:800;padding:15px 18px;width:100%;box-shadow:0 10px 22px #ff6b3530}
-.secondary{border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font-weight:700;padding:13px 16px;width:100%}
-.linkbtn{border:0;background:none;color:var(--brand);font-weight:800;width:100%;padding:14px}
-.msg{min-height:20px;margin:10px 0;font-size:13px;color:var(--muted)}
-.error{color:#c0392b}.success{color:var(--green)}
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:5px 0 18px}
-.greeting small{color:var(--muted)}.greeting strong{display:block;font:800 20px "Plus Jakarta Sans";margin-top:3px}
-.icon-btn{width:44px;height:44px;border:1px solid var(--line);border-radius:14px;background:#fff}
-.hero-card{border-radius:28px;padding:22px;color:#fff;background:linear-gradient(135deg,#111827,#273550);box-shadow:var(--shadow);position:relative;overflow:hidden}
-.hero-card:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-70px;top:-80px;background:#ff6b35;opacity:.9}
-.hero-card>*{position:relative;z-index:1}
-.hero-card .eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#ffb79a;font-weight:800}
-.hero-card h1{font:800 27px/1.15 "Plus Jakarta Sans";margin:7px 0}
-.hero-card p{color:#d9dfeb;margin:0;max-width:440px}
-.booking-card{margin-top:-18px;position:relative;z-index:2}
-.field-row{display:flex;gap:10px;align-items:center}
-.pin{width:38px;height:38px;border-radius:12px;background:#fff1eb;display:grid;place-items:center;flex:none}
-.quick-title{display:flex;justify-content:space-between;align-items:center;margin:23px 2px 10px}
-.quick-title strong{font:800 17px "Plus Jakarta Sans"}
-.chips{display:flex;gap:9px;overflow:auto;padding-bottom:4px}
-.chip{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 13px;font-weight:700}
-.fare-preview{margin:14px 0;padding:14px;border-radius:16px;background:#f8f9fb;display:flex;justify-content:space-between;align-items:center}
-.fare-preview small{color:var(--muted);display:block}.fare-preview strong{font:800 22px "Plus Jakarta Sans"}
-.safety{display:flex;gap:12px;align-items:center;margin-top:15px;padding:14px;border-radius:16px;background:#eefaf5;color:#176b4a}
-.safety b{display:block}.safety small{color:#5c806f}
-.tabs{position:sticky;bottom:12px;z-index:10;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:8px;background:#ffffffed;backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:18px;margin-top:25px;box-shadow:0 12px 30px #10182718}
-.tab{border:0;background:transparent;border-radius:12px;padding:10px 6px;font-weight:800;color:#7a8190}
-.tab.active{background:var(--dark);color:#fff}
-.panel h2{font:800 23px "Plus Jakarta Sans"}
-.ride-item{margin:10px 0}.ride-top{display:flex;justify-content:space-between;gap:12px}.status{font-size:11px;font-weight:800;padding:6px 8px;border-radius:999px;background:#fff1eb;color:#c8491f}
-.ride-item p{margin:9px 0;color:#3f4755}.ride-item small{color:var(--muted)}
-.profile-card{text-align:center;padding-top:28px}.avatar{width:76px;height:76px;border-radius:24px;margin:auto;background:#111827;color:#fff;display:grid;place-items:center;font:800 28px "Plus Jakarta Sans"}
-.profile-card h3{font:800 22px "Plus Jakarta Sans";margin:12px 0 2px}.profile-card p{color:var(--muted);margin:0}
-.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.stat{background:#fff;border:1px solid var(--line);border-radius:17px;padding:14px}.stat small{color:var(--muted)}.stat strong{display:block;font:800 22px "Plus Jakarta Sans";margin-top:5px}
-.empty{text-align:center;padding:30px 10px;color:var(--muted)}
-.switch{display:flex;justify-content:space-between;align-items:center}.switch input{display:none}.toggle{width:54px;height:31px;background:#dfe3e8;border-radius:99px;padding:3px}.toggle:after{content:"";display:block;width:25px;height:25px;background:#fff;border-radius:50%;transition:.2s}.switch input:checked+.toggle{background:var(--green)}.switch input:checked+.toggle:after{transform:translateX(23px)}
-@media(min-width:761px){body{padding:20px}.app-shell{border-radius:28px;box-shadow:0 25px 80px #10182712;overflow:hidden;min-height:calc(100vh - 40px)}}
-
-.map-wrap{height:300px;border-radius:22px;overflow:hidden;border:1px solid var(--line);margin:0 0 14px;background:#e8edf2;position:relative}
-#map{height:100%;width:100%}.map-actions{position:absolute;z-index:500;right:12px;top:12px}.map-action{border:0;background:#fff;border-radius:12px;padding:10px 12px;font-weight:800;box-shadow:0 8px 22px #10182720}
-.location-hint{display:flex;gap:9px;padding:10px 12px;background:#f7f8fa;border-radius:13px;color:var(--muted);font-size:13px;margin:10px 0}.route-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.route-stat{background:#f8f9fb;border-radius:15px;padding:13px}.route-stat small{display:block;color:var(--muted)}.route-stat strong{display:block;margin-top:4px;font:800 18px "Plus Jakarta Sans"}
-.search-results{position:relative;z-index:700;background:#fff;border:1px solid var(--line);border-radius:14px;margin-top:-6px;box-shadow:0 12px 30px #10182714;overflow:hidden}.search-result{display:block;width:100%;border:0;background:#fff;text-align:left;padding:12px 14px;border-bottom:1px solid #f0f1f3}.search-result:last-child{border-bottom:0}.search-result b{display:block}.search-result small{display:block;color:var(--muted);margin-top:3px}.leaflet-container{font-family:"DM Sans",system-ui,sans-serif}
-
-
-/* GitHub Pages resilience */
-html,body{min-height:100%;}#map{min-height:300px;background:#e9eef2}.map-wrap{display:block;position:relative}.booking-card{overflow:visible}.search-results{max-height:220px;overflow:auto}.leaflet-control-zoom a{color:#101827!important}
-</style>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script><script src="config.js"></script>
-</head><body><main class="app-shell"><section class="screen">
-<div id="authView" class="auth-wrap">
-  <div class="brand-top"><div class="brand-mark">🏍</div><strong>RideBarkada</strong></div>
-  <div class="auth-hero"><div class="eyebrow">Ride with people you trust</div><h1>Your ride.<br>Your barkada.</h1><p>Simple motorcycle rides for your trusted community—friendly, fast and familiar.</p></div>
-  <div class="auth-art"><div class="bike">🏍️</div></div>
-  <div class="card">
-    <h2 id="authTitle">Welcome back</h2>
-    <p style="color:#6b7280">Sign in to book your next ride.</p>
-    <form id="authForm">
-      <label>Email<input class="input" id="email" type="email" required placeholder="you@email.com"></label>
-      <label>Password<input class="input" id="password" type="password" required minlength="6" placeholder="••••••••"></label>
-      <label id="nameWrap" class="hidden">Full name<input class="input" id="fullName" placeholder="Juan Dela Cruz"></label>
-      <button class="primary" id="authButton">Sign in</button>
-    </form>
-    <button class="linkbtn" id="toggleAuth">Create an account</button><p id="authMsg" class="msg"></p>
-  </div>
-</div>
-
-<div id="appView" class="hidden">
-<header class="topbar"><div class="greeting"><small>Welcome back 👋</small><strong id="userName">Rider</strong></div><button id="logout" class="icon-btn">↪</button></header>
-
-<section id="homePanel" class="panel">
-  <div class="hero-card"><div class="eyebrow">RideBarkada</div><h1>Where are you heading today?</h1><p>Book a trusted motorcycle rider in just a few taps.</p></div>
-  <form id="bookingForm" class="card booking-card">
-    <div class="map-wrap"><div id="map"></div><div class="map-actions"><button type="button" class="map-action" id="locateBtn">◎ My location</button></div></div>
-    <div class="location-hint">📍 <span id="mapHint">Tap the map to choose your pickup location.</span></div>
-    <div class="field-row"><div class="pin">📍</div><label style="flex:1;margin:0">Pickup location<input class="input" id="pickup" required placeholder="Search pickup place"></label></div>
-    <div id="pickupResults" class="search-results hidden"></div>
-    <div class="field-row"><div class="pin">🏁</div><label style="flex:1;margin:0">Destination<input class="input" id="destination" required placeholder="Where are you going?"></label></div>
-    <div id="destinationResults" class="search-results hidden"></div>
-    <div class="quick-title"><strong>Popular places</strong><small style="color:#6b7280">Quick select</small></div>
-    <div class="chips"><button type="button" class="chip" data-dest="Ligao City Hall">🏛 City Hall</button><button type="button" class="chip" data-dest="Ligao Community College">🎓 LiComCo</button><button type="button" class="chip" data-dest="SM City Legazpi">🛍 SM Legazpi</button></div>
-    <div class="route-summary"><div class="route-stat"><small>Distance</small><strong id="routeDistance">—</strong></div><div class="route-stat"><small>Estimated time</small><strong id="routeTime">—</strong></div></div>
-    <input id="distance" type="hidden" value="3">
-    <div class="fare-preview"><div><small>Estimated fare</small><span>Cash payment for now</span></div><strong id="fare">₱66.00</strong></div>
-    <button class="primary">🏍 Request a Ride</button><p id="bookingMsg" class="msg"></p>
-  </form>
-  <div id="activeRide" class="card hidden"></div>
-  <div class="safety"><div style="font-size:25px">🛡️</div><div><b>Ride with confidence</b><small>Only registered RideBarkada riders can accept your request.</small></div></div>
-</section>
-
-<section id="ridesPanel" class="panel hidden"><h2>My Rides</h2><div id="ridesList"></div></section>
-<section id="profilePanel" class="panel hidden"><h2>My Profile</h2><div class="card profile-card"><div class="avatar" id="avatar">N</div><h3 id="profileName">—</h3><p id="profileEmail">—</p><div class="stat-grid"><div class="stat"><small>Role</small><strong id="profileRole">—</strong></div><div class="stat"><small>Rides</small><strong id="profileRides">0</strong></div><div class="stat"><small>Status</small><strong>Active</strong></div></div></div></section>
-
-<nav class="tabs"><button class="tab active" data-panel="homePanel">⌂<br><span>Book</span></button><button class="tab" data-panel="ridesPanel">▣<br><span>My Rides</span></button><button class="tab" data-panel="profilePanel">◯<br><span>Profile</span></button></nav>
-</div>
-</section></main>
+<title>RideBarkada — Your ride. Your barkada.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--n:#0b1220;--o:#ff7a2f;--bg:#f5f7fa;--m:#718096;--l:#e7ebf0;--g:#1fa774}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui;background:var(--bg);color:#101827}button,input{font:inherit}button{cursor:pointer;border:0}.top{height:68px;background:var(--n);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:fixed;top:0;left:0;right:0;z-index:20}.brand{font-weight:800;display:flex;gap:9px;align-items:center}.logo{width:34px;height:34px;border-radius:11px;background:var(--o);display:grid;place-items:center;font-size:11px}.ava{background:var(--o);color:#fff;width:38px;height:38px;border-radius:50%;font-weight:800}.map{height:440px;padding-top:68px}.map #map{height:100%}.loc{position:absolute;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 8px 25px #0002;z-index:10}.pill{position:absolute;top:86px;left:18px;background:#fff;border-radius:25px;padding:9px 13px;box-shadow:0 8px 25px #0002;font-size:11px;font-weight:700;z-index:10}.sheet{max-width:920px;margin:-45px auto 0;background:#fff;position:relative;z-index:11;border-radius:27px 27px 0 0;padding:22px 25px 30px;box-shadow:0 -10px 35px #0001}.grab{width:42px;height:4px;background:#d9dee5;border-radius:5px;margin:0 auto 20px}.ey{font-size:10px;letter-spacing:1.5px;font-weight:800;color:var(--o)}h1{font-size:27px;margin:7px 0 18px;letter-spacing:-1px}.services{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}.svc{padding:14px;border:1.5px solid var(--l);background:#f8f9fb;border-radius:17px;text-align:left;display:flex;gap:11px;align-items:center}.svc.sel{border-color:var(--o);background:#fff7f2}.svc b{display:block;font-size:12px}.svc small{display:block;color:var(--m);font-size:10px;margin-top:4px}.svc i{font-style:normal;font-size:24px}.fields{background:#f8f9fb;border:1px solid var(--l);border-radius:17px;padding:4px 14px}.fields label{height:51px;display:flex;align-items:center;gap:12px}.fields input{border:0;outline:0;background:transparent;width:100%;font-size:13px}.line{height:1px;background:var(--l);margin-left:22px}.dot{width:9px;height:9px;border-radius:50%}.p{background:var(--g)}.d{background:var(--o)}.fare{display:flex;justify-content:space-between;align-items:center;padding:15px 0}.fare b{font-size:24px}.muted{color:var(--m);font-size:11px}.primary{width:100%;height:53px;background:var(--o);color:#fff;border-radius:15px;font-weight:800;box-shadow:0 10px 25px #ff7a2f33}.hidden{display:none!important}.bikes{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.bike{padding:10px;background:#fff;border:1px solid var(--l);border-radius:15px;text-align:left}.bike.sel{border-color:var(--o);background:#fff7f2}.bikeart{height:72px;background:#eef2f4;border-radius:11px;display:grid;place-items:center;font-size:34px;margin-bottom:7px}.bike b{font-size:11px}.bike small{display:block;color:var(--m);font-size:9px;margin-top:3px}.price{font-weight:800;font-size:12px;margin-top:7px}.nav{height:72px;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--l);z-index:20;display:flex;justify-content:center;gap:18vw}.nav button{background:none;color:#98a1ad}.nav button.active{color:var(--o)}.nav span{display:block;font-size:21px}.nav small{font-size:9px}.page{display:none;max-width:920px;margin:68px auto 72px;padding:28px 18px}.page.on{display:block}.trip{background:#fff;border:1px solid var(--l);border-radius:17px;padding:15px;margin:9px 0;display:flex;gap:12px;align-items:center}.trip .ico{width:42px;height:42px;border-radius:13px;background:#fff1e8;display:grid;place-items:center}.trip main{flex:1}.trip b{font-size:12px}.trip small{display:block;color:var(--m);font-size:10px;margin-top:4px}.modal{display:none;position:fixed;inset:0;z-index:50;background:#08101dcc}.modal.on{display:block}.card{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:min(600px,100%);background:#fff;border-radius:25px 25px 0 0;padding:24px;max-height:88vh;overflow:auto}.close{float:right;width:30px;height:30px;border-radius:50%;background:#f1f3f5}.rider{display:flex;gap:12px;align-items:center;background:#f7f8fa;padding:13px;border-radius:16px;margin:16px 0}.rava{width:52px;height:52px;border-radius:15px;background:var(--n);color:#fff;display:grid;place-items:center;font-weight:800}.rmeta{flex:1}.rmeta b{font-size:13px}.rmeta small{display:block;color:var(--m);font-size:10px;margin-top:4px}.plate{font-size:10px;font-weight:800;border:1px solid var(--l);padding:7px;border-radius:7px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0}.detail{background:#f7f8fa;border-radius:12px;padding:11px}.detail small{display:block;color:var(--m);font-size:9px}.detail b{font-size:11px;display:block;margin-top:4px}.ok{background:#ecfbf5;color:#187d59;padding:12px;border-radius:12px;font-size:11px;margin:12px 0}
+@media(max-width:700px){.map{height:400px}.sheet{margin-top:-40px;padding:20px 16px}.sheet h1{font-size:23px}.services{gap:7px}.svc{padding:11px}.svc b{font-size:10px}.bikes{grid-template-columns:1fr 1fr}}
+</style></head><body>
+<header class="top"><div class="brand"><span class="logo">RB</span>RideBarkada</div><button class="ava" id="ava">C</button></header>
+<section id="home"><div class="map"><div id="map"></div><div class="pill">● <span id="status">Ready to book</span></div><button class="loc" id="loc">⌖</button></div>
+<div class="sheet"><div class="grab"></div><div class="ey">RIDE BARKADA</div><h1>Where are you heading today?</h1>
+<div class="services"><button class="svc sel" data-s="driver"><i>🏍️</i><span><b>Motorcycle + Driver</b><small>We'll take you there</small></span></button><button class="svc" data-s="rent"><i>🔑</i><span><b>Rent a Motorcycle</b><small>You drive it yourself</small></span></button></div>
+<div id="driver"><div class="fields"><label><span class="dot p"></span><input id="pick" placeholder="Pickup location"></label><div class="line"></div><label><span class="dot d"></span><input id="dest" placeholder="Where to?"></label></div><div class="fare"><div><span class="muted">Estimated fare</span><br><b id="fare">₱50</b></div><span class="muted" id="estimate">0.0 km • 10–15 min</span></div><button class="primary" id="book">Find a Rider →</button></div>
+<div id="rent" class="hidden"><p class="muted">Choose a motorcycle for self-drive rental.</p><div class="bikes" id="bikes"></div><div class="fare"><div><span class="muted">Selected</span><br><b id="bikeName">Honda Click 125</b></div><b id="bikeRate">₱350/day</b></div><button class="primary" id="rentBtn">Continue to Rental →</button></div></div></section>
+<section id="trips" class="page"><div class="ey">ACTIVITY</div><h2>Your trips</h2><div id="tripList"></div></section>
+<section id="profile" class="page"><div class="ey">ACCOUNT</div><h2 id="pname">New User</h2><p class="muted" id="pemail">Sign in to sync your account.</p><div class="trip">👤 <b>Personal information</b></div><div class="trip">📍 <b>Saved places</b></div><div class="trip">🛡️ <b>Emergency & safety</b></div><div class="trip">💳 <b>Payment methods</b></div><div class="trip">⚙️ <b>Settings</b></div></section>
+<nav class="nav"><button class="active" data-page="home"><span>⌂</span><small>Home</small></button><button data-page="trips"><span>◷</span><small>Trips</small></button><button data-page="profile"><span>○</span><small>Profile</small></button></nav>
+<div class="modal" id="modal"><div class="card" id="modalCard"></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="config.js"></script>
 <script>
-const client=supabase.createClient(RB_CONFIG.SUPABASE_URL,RB_CONFIG.SUPABASE_ANON_KEY);let user=null,profile=null;
-const $=id=>document.getElementById(id),money=n=>`₱${Number(n).toFixed(2)}`;
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function msg(id,t,e=false){$(id).textContent=t;$(id).className='msg '+(e?'error':'success')}
-function fare(km){return Math.max(50,30+Number(km)*12)}
-let map,pickupMarker,destinationMarker,routeLayer,pickupCoords,destinationCoords;
-const defaultCenter=[13.2389,123.5378];
-function initMap(){if(map)return;map=L.map('map').setView(defaultCenter,13);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);map.on('click',async e=>{setPickupCoords(e.latlng.lat,e.latlng.lng);$('pickup').value=await reverseGeocode(e.latlng.lat,e.latlng.lng);$('mapHint').textContent='Pickup selected. Now choose your destination.'})}
-function markerIcon(emoji){return L.divIcon({className:'',html:`<div style="width:38px;height:38px;border-radius:50%;background:#101827;color:#fff;display:grid;place-items:center;font-size:20px;border:3px solid #fff;box-shadow:0 6px 18px #0005">${emoji}</div>`,iconSize:[38,38],iconAnchor:[19,19]})}
-function setPickupCoords(lat,lng){pickupCoords={lat,lng};if(pickupMarker)pickupMarker.setLatLng([lat,lng]);else pickupMarker=L.marker([lat,lng],{icon:markerIcon('📍')}).addTo(map);if(destinationCoords)route()}
-function setDestinationCoords(lat,lng){destinationCoords={lat,lng};if(destinationMarker)destinationMarker.setLatLng([lat,lng]);else destinationMarker=L.marker([lat,lng],{icon:markerIcon('🏁')}).addTo(map);route()}
-async function reverseGeocode(lat,lon){try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);const d=await r.json();return d.display_name||`${lat.toFixed(5)}, ${lon.toFixed(5)}`}catch(e){return `${lat.toFixed(5)}, ${lon.toFixed(5)}`}}
-async function searchPlace(q){if(!q.trim())return [];try{const r=await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&countrycodes=ph&q=${encodeURIComponent(q)}`);return await r.json()}catch(e){return []}}
-function showResults(which,items){const box=$(which+'Results');box.innerHTML=items.map(x=>`<button type="button" class="search-result" data-lat="${x.lat}" data-lon="${x.lon}" data-name="${esc(x.display_name)}"><b>${esc((x.display_name||'').split(',')[0])}</b><small>${esc(x.display_name)}</small></button>`).join('');box.classList.toggle('hidden',!items.length);box.querySelectorAll('.search-result').forEach(b=>b.onclick=()=>{const lat=Number(b.dataset.lat),lon=Number(b.dataset.lon),name=b.dataset.name;if(which==='pickup'){$('pickup').value=name;setPickupCoords(lat,lon);$('mapHint').textContent='Pickup selected.'}else{$('destination').value=name;setDestinationCoords(lat,lon)}box.classList.add('hidden')})}
-async function route(){if(!pickupCoords||!destinationCoords)return;try{const url=`https://router.project-osrm.org/route/v1/driving/${pickupCoords.lng},${pickupCoords.lat};${destinationCoords.lng},${destinationCoords.lat}?overview=full&geometries=geojson`;const r=await fetch(url),d=await r.json();if(!d.routes?.[0])return;const rt=d.routes[0],km=rt.distance/1000,mins=Math.max(1,Math.round(rt.duration/60));$('distance').value=km.toFixed(2);$('routeDistance').textContent=`${km.toFixed(1)} km`;$('routeTime').textContent=`${mins} min`;$('fare').textContent=money(fare(km));if(routeLayer)routeLayer.remove();routeLayer=L.geoJSON(rt.geometry,{style:{weight:5}}).addTo(map);map.fitBounds(routeLayer.getBounds(),{padding:[35,35]})}catch(e){}}
-$('locateBtn').onclick=()=>navigator.geolocation?.getCurrentPosition(async p=>{map.setView([p.coords.latitude,p.coords.longitude],16);setPickupCoords(p.coords.latitude,p.coords.longitude);$('pickup').value=await reverseGeocode(p.coords.latitude,p.coords.longitude);$('mapHint').textContent='Using your current location as pickup.'},()=>alert('Location access was not allowed.'));
-function bindSearch(input,which){let timer;$(input).addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(async()=>showResults(which,await searchPlace($(input).value)),450)})}bindSearch('pickup','pickup');bindSearch('destination','destination');
-document.querySelectorAll('.chip').forEach(b=>b.onclick=async()=>{$('destination').value=b.dataset.dest;const a=await searchPlace(b.dataset.dest);if(a[0])setDestinationCoords(Number(a[0].lat),Number(a[0].lon))});
-let signup=false;
-$('toggleAuth').onclick=()=>{signup=!signup;$('authTitle').textContent=signup?'Create your RideBarkada account':'Welcome back';$('authButton').textContent=signup?'Create account':'Sign in';$('nameWrap').classList.toggle('hidden',!signup);$('toggleAuth').textContent=signup?'Already have an account? Sign in':'Create an account';$('authMsg').textContent=''};
-$('authForm').onsubmit=async e=>{e.preventDefault();const email=$('email').value.trim(),password=$('password').value;
-if(signup){const fullName=$('fullName').value.trim()||'New User';const {data,error}=await client.auth.signUp({email,password,options:{data:{full_name:fullName},emailRedirectTo:window.location.origin+window.location.pathname}});if(error)return msg('authMsg',error.message,true);if(data.session)loadApp();else msg('authMsg','Account created. Check your email to confirm your account.');}
-else{const {error}=await client.auth.signInWithPassword({email,password});if(error)return msg('authMsg',error.message,true);loadApp()}};
-$('logout').onclick=async()=>{await client.auth.signOut();location.reload()};
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.add('hidden'));b.classList.add('active');$(b.dataset.panel).classList.remove('hidden');if(b.dataset.panel==='ridesPanel')loadRides()});
-$('bookingForm').onsubmit=async e=>{e.preventDefault();const km=Number($('distance').value),f=fare(km);const {data,error}=await client.from('rides').insert({passenger_id:user.id,pickup_address:$('pickup').value.trim(),destination_address:$('destination').value.trim(),distance_km:km,estimated_fare:f,status:'requested'}).select().single();if(error)return msg('bookingMsg',error.message,true);msg('bookingMsg','Ride requested! We are looking for an available rider.');renderActive(data)};
-function renderActive(r){$('activeRide').classList.remove('hidden');$('activeRide').innerHTML=`<div class="ride-top"><strong>🏍 ${esc(r.status.toUpperCase())}</strong><span class="status">LIVE</span></div><p>📍 ${esc(r.pickup_address)}</p><p>🏁 ${esc(r.destination_address)}</p><div class="fare-preview"><span>Estimated fare</span><strong>${money(r.estimated_fare)}</strong></div>`}
-async function loadRides(){const {data}=await client.from('rides').select('*,rider:profiles!rider_id(full_name)').eq('passenger_id',user.id).order('created_at',{ascending:false});$('ridesList').innerHTML=data?.length?data.map(r=>`<div class="card ride-item"><div class="ride-top"><strong>${esc(r.status.toUpperCase())}</strong><span class="status">${new Date(r.created_at).toLocaleDateString()}</span></div><p>📍 ${esc(r.pickup_address)}</p><p>🏁 ${esc(r.destination_address)}</p><small>${r.rider?.full_name?'Rider: '+esc(r.rider.full_name):'Waiting for rider'} · ${money(r.estimated_fare)}</small></div>`).join(''):'<div class="empty">Your ride history will appear here.</div>'}
-async function loadApp(){const {data:{user:u}}=await client.auth.getUser();if(!u)return;user=u;const {data:p}=await client.from('profiles').select('*').eq('id',user.id).single();profile=p;$('authView').classList.add('hidden');$('appView').classList.remove('hidden');setTimeout(initMap,100);const name=p?.full_name||u.email;$('userName').textContent=name;$('profileName').textContent=name;$('profileEmail').textContent=u.email;$('profileRole').textContent=p?.role||'passenger';$('avatar').textContent=name.trim().charAt(0).toUpperCase();const {data:r}=await client.from('rides').select('id').eq('passenger_id',user.id);$('profileRides').textContent=r?.length||0;const {data:a}=await client.from('rides').select('*').eq('passenger_id',user.id).in('status',['requested','accepted','arriving','ongoing']).order('created_at',{ascending:false}).limit(1);if(a?.[0])renderActive(a[0]);client.channel('ride-updates').on('postgres_changes',{event:'UPDATE',schema:'public',table:'rides',filter:`passenger_id=eq.${user.id}`},p=>renderActive(p.new)).subscribe()}
-client.auth.onAuthStateChange((event,session)=>{if(session)loadApp()});client.auth.getSession().then(({data})=>{if(data.session)loadApp()});
+const sb=supabase.createClient(RIDEBARKADA_CONFIG.SUPABASE_URL,RIDEBARKADA_CONFIG.SUPABASE_ANON_KEY);let user=null,selected={id:"bike-001",name:"Honda Click 125",rate:350,deposit:1000};const bikes=[["bike-001","Honda Click 125",350,"🏍️"],["bike-002","Yamaha Mio Sporty",300,"🛵"],["bike-003","Honda Beat",320,"🏍️"]];
+const map=L.map("map",{zoomControl:false}).setView([13.238,123.536],14);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap"}).addTo(map);
+document.querySelectorAll(".svc").forEach(x=>x.onclick=()=>{document.querySelectorAll(".svc").forEach(y=>y.classList.remove("sel"));x.classList.add("sel");document.getElementById("driver").classList.toggle("hidden",x.dataset.s!="driver");document.getElementById("rent").classList.toggle("hidden",x.dataset.s!="rent")});
+document.querySelectorAll(".nav button").forEach(x=>x.onclick=()=>{document.querySelectorAll(".nav button").forEach(y=>y.classList.remove("active"));x.classList.add("active");["home","trips","profile"].forEach(id=>document.getElementById(id).classList.toggle(id=="home"?"":"on",id==x.dataset.page));document.getElementById("home").style.display=x.dataset.page=="home"?"block":"none";document.getElementById(x.dataset.page).style.display=x.dataset.page=="home"?"block":"block";if(x.dataset.page=="home")setTimeout(()=>map.invalidateSize(),100)});
+function renderBikes(){document.getElementById("bikes").innerHTML=bikes.map((b,i)=>`<button class="bike ${i==0?"sel":""}" data-id="${b[0]}"><div class="bikeart">${b[3]}</div><b>${b[1]}</b><small>Automatic</small><div class="price">₱${b[2]}/day</div></button>`).join("");document.querySelectorAll(".bike").forEach(x=>x.onclick=()=>{selected=bikes.map(b=>({id:b[0],name:b[1],rate:b[2],deposit:1000})).find(b=>b.id==x.dataset.id);document.querySelectorAll(".bike").forEach(y=>y.classList.remove("sel"));x.classList.add("sel");bikeUI()})}
+function bikeUI(){document.getElementById("bikeName").textContent=selected.name;document.getElementById("bikeRate").textContent="₱"+selected.rate+"/day"}renderBikes();
+document.getElementById("loc").onclick=()=>navigator.geolocation?.getCurrentPosition(p=>{L.marker([p.coords.latitude,p.coords.longitude]).addTo(map);map.setView([p.coords.latitude,p.coords.longitude],16);document.getElementById("pick").value="Current location";document.getElementById("status").textContent="Location found"});
+["pick","dest"].forEach(id=>document.getElementById(id).oninput=()=>{let k=Math.max(1.5,Math.min(25,(pick.value.length+dest.value.length)/4));document.getElementById("fare").textContent="₱"+Math.max(50,Math.round(30+k*12));document.getElementById("estimate").textContent=k.toFixed(1)+" km • "+Math.max(8,Math.round(k*3))+"–"+Math.max(12,Math.round(k*4))+" min"});
+async function init(){let q=await sb.auth.getUser();user=q.data.user;if(user){let p=await sb.from("profiles").select("*").eq("id",user.id).maybeSingle();if(p.data?.full_name){pname.textContent=p.data.full_name;ava.textContent=p.data.full_name[0].toUpperCase()}pemail.textContent=user.email||""}loadTrips()}init();
+document.getElementById("book").onclick=async()=>{if(!user)return auth();if(!pick.value||!dest.value)return alert("Enter pickup and destination.");let fare=Number(document.getElementById("fare").textContent.replace(/[₱,]/g,""));let km=parseFloat(document.getElementById("estimate").textContent)||0;let r=await sb.from("rides").insert({passenger_id:user.id,pickup_address:pick.value,destination_address:dest.value,distance_km:km,estimated_fare:fare,status:"requested"}).select().single();if(r.error)return alert(r.error.message);modal(`<button class="close" onclick="closeM()">×</button><div class="ey">RIDE REQUESTED</div><h2>Finding your barkada rider</h2><p class="muted">Nearby riders will receive your request.</p><div class="ok">✓ Booking ${r.data.id.slice(0,8)} created</div><button class="primary" onclick="demoMatch('${r.data.id}')">Demo: Match Rider →</button>`)};
+window.demoMatch=async id=>{let x=await sb.from("profiles").select("*").eq("role","rider").eq("is_online",true).limit(1);if(!x.data?.length)return modal(`<button class="close" onclick="closeM()">×</button><h2>No online riders yet</h2><p class="muted">The production version will update automatically when a rider accepts.</p><button class="primary" onclick="closeM()">Okay</button>`);let r=x.data[0];await sb.from("rides").update({rider_id:r.id,status:"accepted",accepted_at:new Date().toISOString()}).eq("id",id);modal(`<button class="close" onclick="closeM()">×</button><div class="ey">RIDER FOUND</div><h2>Your barkada is on the way</h2><div class="rider"><div class="rava">${(r.full_name||"R")[0]}</div><div class="rmeta"><b>${r.full_name||"RideBarkada Rider"}</b><small>⭐ 4.9 · Verified rider · ${r.motorcycle_model||"Motorcycle"}</small></div><div class="plate">${r.plate_number||"RBK-0000"}</div></div><div class="grid"><div class="detail"><small>ETA</small><b>5–8 min</b></div><div class="detail"><small>Status</small><b>Accepted</b></div></div><button class="primary" onclick="closeM()">View Live Ride</button>`)};
+document.getElementById("rentBtn").onclick=()=>{if(!user)return auth();modal(`<button class="close" onclick="closeM()">×</button><div class="ey">SELF-DRIVE RENTAL</div><h2>Rent ${selected.name}</h2><div class="grid"><div class="detail"><small>Rental rate</small><b>₱${selected.rate}/day</b></div><div class="detail"><small>Security deposit</small><b>₱${selected.deposit}</b></div><div class="detail"><small>Transmission</small><b>Automatic</b></div><div class="detail"><small>Pickup</small><b>RideBarkada Hub</b></div></div><div class="ok">✓ Availability will be confirmed before checkout.</div><button class="primary" onclick="rentalRequest()">Request Rental →</button>`)};
+window.rentalRequest=async()=>{let x=await sb.from("rental_bookings").insert({customer_id:user.id,motorcycle_id:selected.id,pickup_location:"RideBarkada Hub",duration_days:1,rental_fee:selected.rate,security_deposit:selected.deposit,status:"requested"});if(x.error)return alert("Run supabase/schema.sql first. "+x.error.message);modal(`<button class="close" onclick="closeM()">×</button><div class="ey">REQUEST RECEIVED</div><h2>Rental request sent</h2><p class="muted">${selected.name} is pending confirmation.</p><button class="primary" onclick="closeM()">Done</button>`)};
+async function loadTrips(){if(!user){tripList.innerHTML='<div class="trip">🔐 <b>Sign in to view trips</b></div>';return}let r=await sb.from("rides").select("*").eq("passenger_id",user.id).order("created_at",{ascending:false}).limit(20);let q=await sb.from("rental_bookings").select("*").eq("customer_id",user.id).order("created_at",{ascending:false}).limit(20);let a=[...(r.data||[]).map(x=>["🏍️",x.destination_address,x.status,x.estimated_fare]),...(q.data||[]).map(x=>["🔑","Motorcycle rental",x.status,x.rental_fee])];tripList.innerHTML=a.map(x=>`<div class="trip"><div class="ico">${x[0]}</div><main><b>${x[1]||""}</b><small>${x[2]}</small></main><b>₱${x[3]||0}</b></div>`).join("")||'<div class="trip">🏍️ <b>No trips yet</b></div>'}
+function modal(x){modalCard.innerHTML=x;document.getElementById("modal").classList.add("on")}function closeM(){document.getElementById("modal").classList.remove("on")}function auth(){modal(`<button class="close" onclick="closeM()">×</button><div class="ey">ACCOUNT</div><h2>Sign in to continue</h2><input id="em" placeholder="Email" style="width:100%;padding:14px;margin:8px 0;border:1px solid #e7ebf0;border-radius:12px"><input id="pw" type="password" placeholder="Password" style="width:100%;padding:14px;margin:8px 0 15px;border:1px solid #e7ebf0;border-radius:12px"><button class="primary" onclick="login()">Sign In</button>`)}async function login(){let x=await sb.auth.signInWithPassword({email:em.value,password:pw.value});if(x.error)return alert(x.error.message);closeM();init()}
+window.closeM=closeM;window.login=login;
 </script></body></html>

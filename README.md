@@ -1,20 +1,9 @@
-# RideBarkada Elegant Frontend
+# RideBarkada V2
+This version adds the two-service booking choice:
+1. Motorcycle + Driver
+2. Rent a Motorcycle (self-drive)
 
-This version refreshes the visual design while keeping the current Supabase MVP workflow.
-
-Live site:
-https://cjpmalinis.github.io/ridebarkada/
-
-Before replacing files in GitHub, make sure Supabase Authentication → URL Configuration contains:
-
-Site URL:
-https://cjpmalinis.github.io/ridebarkada/
-
-Redirect URL:
-https://cjpmalinis.github.io/ridebarkada/**
-
-The next planned upgrade is map/GPS integration, automatic route distance, live rider location and richer booking UX.
-
-
-## Map MVP
-This version adds a Leaflet/OpenStreetMap map, browser geolocation, place search, route distance, estimated travel time, and automatic fare calculation. The public geocoding/routing services are suitable for prototyping; use dedicated providers and follow their usage policies for production scale.
+Upload the CONTENTS of this folder to the GitHub repository root.
+Run supabase/schema.sql in Supabase SQL Editor before using ride/rental database features.
+The browser config contains only the Supabase publishable key.
+The current fare/distance calculation is a prototype; connect a production geocoder/routing provider before launch.
