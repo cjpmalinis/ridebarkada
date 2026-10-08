@@ -14,3 +14,7 @@ Redirect URL:
 https://cjpmalinis.github.io/ridebarkada/**
 
 The next planned upgrade is map/GPS integration, automatic route distance, live rider location and richer booking UX.
+
+
+## Map MVP
+This version adds a Leaflet/OpenStreetMap map, browser geolocation, place search, route distance, estimated travel time, and automatic fare calculation. The public geocoding/routing services are suitable for prototyping; use dedicated providers and follow their usage policies for production scale.
