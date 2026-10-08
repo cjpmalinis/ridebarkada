@@ -1,35 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RideBarkada Rider</title><link rel="stylesheet" href="styles.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script></head>
-<body><main class="app"><section class="screen">
-<header class="topbar"><div><small>Rider Dashboard</small><strong id="name">Loading…</strong></div><button id="logout" class="iconbtn">↪</button></header>
-<div id="notice" class="msg"></div>
-<div class="card riderToggle"><span>Accepting rides</span><label class="switch"><input id="online" type="checkbox"><span></span></label></div>
-<h2>Ride Requests</h2><div id="requests"><div class="empty">Loading…</div></div>
-<h2>My Active Ride</h2><div id="active"><div class="empty">No active ride.</div></div>
-</section></main>
-<script>
-const c=supabase.createClient(RB_CONFIG.SUPABASE_URL,RB_CONFIG.SUPABASE_ANON_KEY);let me;
-const $=x=>document.getElementById(x);
-async function init(){
- const {data:{user}}=await c.auth.getUser(); if(!user){location.href='index.html';return} me=user;
- const {data:p}=await c.from('profiles').select('*').eq('id',user.id).single(); $('name').textContent=p?.full_name||user.email;
- $('online').checked=!!p?.is_online;
- load();
- c.channel('requests').on('postgres_changes',{event:'*',schema:'public',table:'rides'},()=>load()).subscribe();
-}
-$('online').onchange=async()=>{await c.from('profiles').update({is_online:$('online').checked}).eq('id',me.id);};
-$('logout').onclick=async()=>{await c.auth.signOut();location.href='index.html'};
-async function load(){
- const {data,error}=await c.from('rides').select('*,passenger:profiles!passenger_id(full_name)').eq('status','requested').order('created_at',{ascending:true});
- if(error){$('requests').textContent=error.message;return}
- $('requests').innerHTML=data?.length?data.map(r=>`<div class="card ride"><strong>${esc(r.pickup_address)} → ${esc(r.destination_address)}</strong><p>Passenger: ${esc(r.passenger?.full_name||'Passenger')}</p><div class="fare"><span>Fare</span><strong>₱${Number(r.estimated_fare).toFixed(2)}</strong></div><button class="primary" onclick="acceptRide('${r.id}')">Accept Ride</button></div>`).join(''):'<div class="empty">No requests right now.</div>';
- const {data:a}=await c.from('rides').select('*,passenger:profiles!passenger_id(full_name)').eq('rider_id',me.id).in('status',['accepted','arriving','ongoing']).order('created_at',{ascending:false}).limit(1);
- $('active').innerHTML=a?.[0]?activeCard(a[0]):'<div class="empty">No active ride.</div>';
-}
-function activeCard(r){let next=r.status==='accepted'?'arriving':r.status==='arriving'?'ongoing':'completed';let label=next==='arriving'?'I’m Arriving':next==='ongoing'?'Start Ride':'Complete Ride';return `<div class="card ride"><strong>${esc(r.passenger?.full_name||'Passenger')}</strong><p>📍 ${esc(r.pickup_address)}</p><p>🏁 ${esc(r.destination_address)}</p><button class="primary" onclick="advance('${r.id}','${next}')">${label}</button></div>`}
-async function acceptRide(id){const {error}=await c.from('rides').update({rider_id:me.id,status:'accepted',accepted_at:new Date().toISOString()}).eq('id',id).eq('status','requested');if(error)alert(error.message);load()}
-async function advance(id,status){const patch={status};if(status==='completed')patch.completed_at=new Date().toISOString();const {error}=await c.from('rides').update(patch).eq('id',id).eq('rider_id',me.id);if(error)alert(error.message);load()}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RideBarkada Rider</title><link rel="stylesheet" href="styles.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script></head><body><main class="app-shell"><section class="screen"><div class="brand-top"><div class="brand-mark">🏍</div><strong>RideBarkada</strong></div><header class="topbar" style="margin-top:20px"><div class="greeting"><small>Rider dashboard</small><strong id="name">Loading…</strong></div><button id="logout" class="icon-btn">↪</button></header><div class="card switch"><span><b>Available for rides</b><small style="display:block;color:#6b7280;margin-top:3px">Go online when you're ready.</small></span><label class="switch" style="margin:0"><input id="online" type="checkbox"><span class="toggle"></span></label></div><h2>Ride Requests</h2><div id="requests"></div><h2>My Active Ride</h2><div id="active"></div></section></main><script>
+const c=supabase.createClient(RB_CONFIG.SUPABASE_URL,RB_CONFIG.SUPABASE_ANON_KEY),$=x=>document.getElementById(x);let me;
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-init();
+async function init(){const {data:{user}}=await c.auth.getUser();if(!user)return location.href='index.html';me=user;const {data:p}=await c.from('profiles').select('*').eq('id',user.id).single();if(p?.role!=='rider'){$('requests').innerHTML='<div class="card">Your account is not assigned the rider role yet.</div>';return}$('name').textContent=p.full_name;$('online').checked=!!p.is_online;load();c.channel('rider-updates').on('postgres_changes',{event:'*',schema:'public',table:'rides'},load).subscribe()}
+$('online').onchange=async()=>{await c.from('profiles').update({is_online:$('online').checked}).eq('id',me.id);load()};$('logout').onclick=async()=>{await c.auth.signOut();location.href='index.html'};
+async function load(){const {data:r}=await c.from('rides').select('*,passenger:profiles!passenger_id(full_name)').eq('status','requested').order('created_at');$('requests').innerHTML=r?.length?r.map(x=>`<div class="card ride-item"><div class="ride-top"><strong>New request</strong><span class="status">₱${Number(x.estimated_fare).toFixed(0)}</span></div><p>👤 ${esc(x.passenger?.full_name||'Passenger')}</p><p>📍 ${esc(x.pickup_address)}</p><p>🏁 ${esc(x.destination_address)}</p><button class="primary" onclick="accept('${x.id}')">Accept ride</button></div>`).join(''):'<div class="empty">No ride requests right now.</div>';const {data:a}=await c.from('rides').select('*,passenger:profiles!passenger_id(full_name)').eq('rider_id',me.id).in('status',['accepted','arriving','ongoing']).limit(1);$('active').innerHTML=a?.[0]?card(a[0]):'<div class="empty">No active ride.</div>'}
+function card(x){const n=x.status==='accepted'?'arriving':x.status==='arriving'?'ongoing':'completed';const label=n==='arriving'?'I’m arriving':n==='ongoing'?'Start ride':'Complete ride';return `<div class="card ride-item"><strong>${esc(x.passenger?.full_name||'Passenger')}</strong><p>📍 ${esc(x.pickup_address)}</p><p>🏁 ${esc(x.destination_address)}</p><button class="primary" onclick="advance('${x.id}','${n}')">${label}</button></div>`}
+async function accept(id){await c.from('rides').update({rider_id:me.id,status:'accepted',accepted_at:new Date().toISOString()}).eq('id',id).eq('status','requested');load()}async function advance(id,status){const patch={status};if(status==='completed')patch.completed_at=new Date().toISOString();await c.from('rides').update(patch).eq('id',id).eq('rider_id',me.id);load()}init();
 </script></body></html>

@@ -1,18 +1,16 @@
-# RideBarkada MVP
+# RideBarkada Elegant Frontend
 
-A private motorcycle ride-booking MVP for a small group of registered riders/friends.
+This version refreshes the visual design while keeping the current Supabase MVP workflow.
 
-## Stack
-- HTML/CSS/JavaScript
-- Supabase Auth + PostgreSQL + Realtime
-- Map integration can be connected later
+Live site:
+https://cjpmalinis.github.io/ridebarkada/
 
-## Setup
-1. Create a Supabase project.
-2. Open SQL Editor and run `supabase/schema.sql`.
-3. Copy your Supabase Project URL and anon key into `config.js`.
-4. Deploy the folder to GitHub Pages or another static host.
-5. Create accounts through the app, then assign rider/admin roles in Supabase.
+Before replacing files in GitHub, make sure Supabase Authentication → URL Configuration contains:
 
-## Important
-This MVP is intended for private/internal testing. Public/commercial motorcycle passenger transport may require applicable Philippine regulatory approvals, insurance, permits, and other compliance.
+Site URL:
+https://cjpmalinis.github.io/ridebarkada/
+
+Redirect URL:
+https://cjpmalinis.github.io/ridebarkada/**
+
+The next planned upgrade is map/GPS integration, automatic route distance, live rider location and richer booking UX.
